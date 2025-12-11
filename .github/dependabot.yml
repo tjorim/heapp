@@ -1,17 +1,55 @@
-# Basic set up for three package managers
+# Dependabot configuration for heapp-backend
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
 updates:
-
-  # Maintain dependencies for GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "daily"
-
-  # Maintain dependencies for npm
+  # Monitor npm dependencies
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "friday"
+      time: "18:00"
+      timezone: "Etc/UTC"
+    assignees:
+      - "tjorim"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "npm"
+    versioning-strategy: "increase"
+    groups:
+      # Group Express core dependencies (tightly coupled)
+      express:
+        patterns:
+          - "express"
+          - "body-parser"
+      # Group MongoDB with Mongoose (database + ODM)
+      mongodb:
+        patterns:
+          - "mongodb"
+          - "mongoose"
+      # Group ESLint and its plugins (linting tools)
+      eslint:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+
+  # Monitor GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "18:00"
+      timezone: "Etc/UTC"
+    assignees:
+      - "tjorim"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
