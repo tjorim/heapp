@@ -1,11 +1,10 @@
-# Dependabot configuration for heapp-backend
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
 updates:
   # Monitor npm dependencies
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/backend"
     schedule:
       interval: "weekly"
       day: "friday"
