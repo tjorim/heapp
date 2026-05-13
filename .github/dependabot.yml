@@ -5,6 +5,7 @@ updates:
   # Monitor npm dependencies
   - package-ecosystem: "npm"
     directory: "/backend"
+    open-pull-requests-limit: 0
     schedule:
       interval: "weekly"
       day: "friday"
@@ -39,6 +40,7 @@ updates:
   # Monitor GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
+    open-pull-requests-limit: 0
     schedule:
       interval: "weekly"
       day: "friday"
