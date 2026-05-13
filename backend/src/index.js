@@ -6,20 +6,16 @@ console.log('Hello ever running Node.js project.');
 console.log(process.env.MY_SECRET);
 
 const express = require('express');
-
-// Express related imports
-// other node package imports
+const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 const { models, connectDb } = require('./models');
 
 const app = express();
 
-// additional Express stuff: middleware, routes, ...
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true,
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /*
 app.get('/', (req, res) => res.send('Received a GET HTTP method'));
